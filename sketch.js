@@ -78,12 +78,10 @@ function draw() {
  
  for (var i=0; i<playerArrows.length; i++) 
  {
- showArrows(i, playerArrows[i]);
+ showArrows(i, playerArrows);
+
  }
 
-
-keyPressed ();
-keyReleased (); 
 
 }
 
@@ -94,10 +92,10 @@ function keyPressed() {
     // create an arrow object and add into an array ; set its angle same as angle of playerArcher
     var posX = playerArcher.body.position.x;
     var posY = playerArcher.body.position.y;
-    var angle = playerArcher.body.angle;
+    var angle = playerArcher.body.angle+PI/2;
     var arrow = new PlayerArrow(posX, posY, 100, 10);
-    arrow.trajectory = [angle];
-    Matter.Body.setAngle(arrow.body);
+    arrow.trajectory = [];
+    Matter.Body.setAngle(arrow.body, angle);
     playerArrows.push(arrow);
   }
 }
@@ -107,7 +105,7 @@ function keyReleased () {
 
   if(keyCode === 32){
     //call shoot() function for each arrow in an array playerArrows
-    if (playerArrows.length > 0) {
+    if (playerArrows.length> 0) {
       var angle = playerArcher.body.angle+PI/2;
       playerArrows[playerArrows.length - 1].shoot(angle);
     }
@@ -117,12 +115,9 @@ function keyReleased () {
 //Display arrow and Trajectory
 function showArrows(index, arrows) {
   arrows[index].display();
-  if (arrow.body.position.x>=width || arrow.body.position.y>=height-70)
+ /* if (arrow.body.position.x>=width || arrow.body.position.y>=height-160)
  {
   Matter.World.remove(world, arrow.body);
- arrows.splice(index,1);
-}
-  
- 
-
+ arrows.splice(index,1); 
+} */ 
 }
